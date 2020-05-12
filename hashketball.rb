@@ -1,4 +1,8 @@
+require 'pry'
+
 # Write your code below game_hash
+
+
 def game_hash
   {
     home: {
@@ -124,6 +128,163 @@ def game_hash
       ]
     }
   }
+end
+
+
+def num_points_scored (name)
+  
+  hash = game_hash
+  
+  hash.each do |location, value|
+
+    value[:players].each do |element|
+      
+      if element[:player_name] == name
+        return element[:points]
+      end
+      
+    end
+    
+  end
+  
+end
+
+
+def shoe_size (name)
+  
+  hash = game_hash
+  
+  hash.each do |location, value|
+
+    value[:players].each do |element|
+      
+      if element[:player_name] == name
+        return element[:shoe]
+      end
+      
+    end
+    
+  end
+  
+end
+
+
+
+
+def team_colors (team)
+  
+  hash = game_hash
+ 
+  if team == "Charlotte Hornets"
+    return hash[:away][:colors]
+  end
+  
+  if team == "Brooklyn Nets"
+    return hash[:home][:colors]
+  end
+  
+end
+
+
+def team_names 
+  
+  hash = game_hash
+  
+  array = []
+  
+  hash.each do |key, value|
+    
+    array.push(value[:team_name])
+    
+  end
+  
+  array
+  
+end
+
+
+def player_numbers (team)
+  
+  hash = game_hash
+  
+  numbers = []
+  
+  hash.each do |key, value|
+    
+    if value[:team_name] == team
+      
+      counter = 0 
+      while counter < value[:players].length do
+      
+        numbers.push(value[:players][counter][:number])
+        
+        counter += 1
+      
+      end
+    
+    end
+    
+  end
+  
+  numbers
+  
+end
+
+
+def player_stats (player)
+  
+  hash = game_hash
+  stats = {}
+  
+  hash.each do |location, value|
+
+    value[:players].each do |element|
+      
+      if element[:player_name] == player
+        stats = element
+      end
+      
+    end
+    
+  end
+  
+  stats
+  
+end
+
+
+def big_shoe_rebounds 
+  
+  hash = game_hash
+  
+  sizes = []
+  
+  hash.each do |location, value|
+
+    value[:players].each do |element|
+      
+      sizes.push(element[:shoe])
+      
+    end
+    
+  end
+  
+  sizes.sort! 
+ 
+  largest_size = sizes.last 
+  
+  hash.each do |location, value|
+
+    value[:players].each do |element|
+      
+      if element[:shoe] == largest_size
+        return element[:rebounds]
+      end
+      
+    end
+    
+  end
+  
 end
 
 # Write code here
